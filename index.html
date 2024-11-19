@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Todo List</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="theme-toggle">
+                <button id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="categories-section">
+                <h3>Categories</h3>
+                <ul id="categoryList">
+                    <li data-category="all" class="active">All Tasks</li>
+                    <li data-category="work">Work</li>
+                    <li data-category="personal">Personal</li>
+                    <li data-category="shopping">Shopping</li>
+                </ul>
+                <button id="addCategory" class="small-button">
+                    <i class="fas fa-plus"></i> Add Category
+                </button>
+            </div>
+            <div class="filters-section">
+                <h3>Filters</h3>
+                <ul id="filtersList">
+                    <li data-filter="all" class="active">All</li>
+                    <li data-filter="active">Active</li>
+                    <li data-filter="completed">Completed</li>
+                    <li data-filter="high">High Priority</li>
+                    <li data-filter="medium">Medium Priority</li>
+                    <li data-filter="low">Low Priority</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <h1>Todo List</h1>
+            
+            <div class="statistics">
+                <div class="stat-item">
+                    <span class="stat-label">Total Tasks</span>
+                    <span id="totalTasks" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Completed</span>
+                    <span id="completedTasks" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Active</span>
+                    <span id="activeTasks" class="stat-value">0</span>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progressBar" class="progress"></div>
+                </div>
+                <span id="progressText">0% Complete</span>
+            </div>
+
+            <div class="input-section">
+                <input type="text" id="taskInput" placeholder="Add a new task...">
+                <select id="taskPriority">
+                    <option value="high">High</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <input type="date" id="taskDeadline">
+                <select id="taskCategory">
+                    <option value="work">Work</option>
+                    <option value="personal">Personal</option>
+                    <option value="shopping">Shopping</option>
+                </select>
+                <button id="addTask">Add</button>
+            </div>
+
+            <div class="sort-section">
+                <label>Sort by:</label>
+                <select id="sortCriteria">
+                    <option value="dateAdded">Date Added</option>
+                    <option value="priority">Priority</option>
+                    <option value="deadline">Deadline</option>
+                    <option value="alphabetical">Alphabetical</option>
+                </select>
+            </div>
+
+            <div class="tasks-container">
+                <div class="tasks-header">
+                    <h3>Today's Tasks</h3>
+                    <button id="templateBtn" class="small-button">
+                        <i class="fas fa-copy"></i> Templates
+                    </button>
+                </div>
+                <ul id="tasksList"></ul>
+            </div>
+
+            <!-- Templates Modal -->
+            <div id="templatesModal" class="modal">
+                <div class="modal-content">
+                    <h3>Task Templates</h3>
+                    <ul id="templatesList">
+                        <li>Daily Standup Meeting</li>
+                        <li>Weekly Report</li>
+                        <li>Grocery Shopping</li>
+                    </ul>
+                    <button id="addTemplate" class="small-button">
+                        <i class="fas fa-plus"></i> Add Template
+                    </button>
+                    <button id="closeTemplates" class="small-button">Close</button>
+                </div>
+            </div>
+
+            <!-- Edit Task Modal -->
+            <div id="editTaskModal" class="modal">
+                <div class="modal-content">
+                    <h3>Edit Task</h3>
+                    <input type="text" id="editTaskInput">
+                    <select id="editTaskPriority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                    <input type="date" id="editTaskDeadline">
+                    <select id="editTaskCategory">
+                        <option value="work">Work</option>
+                        <option value="personal">Personal</option>
+                        <option value="shopping">Shopping</option>
+                    </select>
+                    <button id="saveTaskEdit">Save</button>
+                    <button id="cancelTaskEdit">Cancel</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

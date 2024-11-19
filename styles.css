@@ -1,0 +1,560 @@
+:root {
+    /* Light theme variables */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --border-color: #e0e0e0;
+    --accent-color: #3498db;
+    --accent-hover: #2980b9;
+    --delete-color: #ff6b6b;
+    --delete-hover: #ff5252;
+    --success-color: #2ecc71;
+    --warning-color: #f1c40f;
+    --sidebar-bg: #f8f9fa;
+    --modal-bg: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --tag-bg: #e9ecef;
+    --tag-color: #495057;
+    --tag-hover: #dee2e6;
+    --tag-active: #3498db;
+    --tag-active-color: #ffffff;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --border-color: #404040;
+    --accent-color: #3498db;
+    --accent-hover: #2980b9;
+    --delete-color: #e74c3c;
+    --delete-hover: #c0392b;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --sidebar-bg: #2d2d2d;
+    --modal-bg: #333333;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --tag-bg: #404040;
+    --tag-color: #e9ecef;
+    --tag-hover: #4a4a4a;
+    --tag-active: #3498db;
+    --tag-active-color: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    padding: 20px;
+    border-right: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
+.theme-toggle {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.theme-toggle button {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 8px;
+    font-size: 1.2em;
+}
+
+.categories-section,
+.filters-section {
+    margin-bottom: 30px;
+}
+
+.categories-section h3,
+.filters-section h3 {
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+#categoryList,
+#filtersList {
+    list-style: none;
+}
+
+#categoryList li,
+#filtersList li {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#categoryList li:hover,
+#filtersList li:hover {
+    background-color: var(--tag-hover);
+}
+
+#categoryList li.active,
+#filtersList li.active {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: 500;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Statistics Styles */
+.statistics {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    background-color: var(--bg-secondary);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 15px;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    flex: 1;
+    margin: 0 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover::after {
+    transform: scaleX(1);
+}
+
+.stat-label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+/* Progress Bar Styles */
+.progress-container {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: var(--bg-secondary);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress {
+    height: 100%;
+    background-color: var(--success-color);
+    transition: width 0.3s ease;
+}
+
+#progressText {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+/* Input Section Styles */
+.input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    background-color: var(--bg-secondary);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+input[type="text"],
+select,
+input[type="date"] {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"] {
+    flex: 1;
+}
+
+input[type="text"]:focus,
+select:focus,
+input[type="date"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+button {
+    padding: 12px 25px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--accent-hover);
+}
+
+.small-button {
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+/* Sort Section Styles */
+.sort-section {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--bg-secondary);
+    border-radius: 6px;
+}
+
+.sort-section label {
+    margin-right: 10px;
+    color: var(--text-secondary);
+}
+
+.sort-section select {
+    flex: 1;
+}
+
+/* Tasks Container Styles */
+.tasks-container {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    padding: 20px;
+}
+
+.tasks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#tasksList {
+    list-style: none;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.task-checkbox {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 2px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.task-checkbox:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.task-content {
+    flex: 1;
+    min-width: 0; /* Prevent flex item from overflowing */
+    display: flex;
+    flex-direction: column;
+}
+
+.task-text {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.task-details {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+}
+
+.task-tags {
+    display: inline-flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background-color: var(--tag-bg);
+    color: var(--tag-color);
+    border-radius: 12px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.tag:hover {
+    background-color: var(--tag-hover);
+    transform: translateY(-1px);
+}
+
+.tag.active {
+    background-color: var(--tag-active);
+    color: var(--tag-active-color);
+}
+
+.task-priority {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.priority-high {
+    background-color: var(--delete-color);
+    color: white;
+}
+
+.priority-medium {
+    background-color: var(--warning-color);
+    color: var(--text-primary);
+}
+
+.priority-low {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: 16px;
+}
+
+.edit-btn,
+.delete-btn {
+    padding: 6px;
+    border-radius: 4px;
+    background-color: transparent;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: var(--delete-color);
+    color: white;
+}
+
+/* Filter Info Styles */
+.filter-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: var(--bg-secondary);
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.clear-filter {
+    padding: 4px 8px;
+    font-size: 0.85em;
+    background-color: var(--tag-bg);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clear-filter:hover {
+    background-color: var(--tag-hover);
+}
+
+/* No Tasks Message */
+.no-tasks {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--modal-bg);
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        position: fixed;
+        top: 0;
+        left: -250px;
+        z-index: 1000;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .statistics {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .stat-item {
+        margin: 0;
+    }
+
+    .input-section {
+        flex-wrap: wrap;
+    }
+
+    input[type="text"],
+    select,
+    input[type="date"],
+    button {
+        width: 100%;
+    }
+
+    .task-details {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .task-actions {
+        flex-direction: column;
+    }
+}
